@@ -1,0 +1,27 @@
+# Dumbbell Loader
+
+> Free plate-loading calculator for the Eisenlink adjustable square dumbbell (also sold as Zipro). Enter a target weight and get the exact, balanced plate stack for each dumbbell.
+
+Dumbbell Loader works out how to load an Eisenlink adjustable square dumbbell (the A030) — a 4 kg screw-cap handle loaded with cast-iron plates — to a target weight. It is a single, self-contained web page with no tracking or sign-up.
+
+## Equipment model
+- Handle: 4 kg (always).
+- Lock screws: 1 kg each, one per side (2 total). Mandatory whenever any plate is fitted. A bare 4 kg handle is the only screw-free load.
+- Plates: 2 kg plates are unlimited; exactly two 1 kg plates exist (max one per side).
+- Fixed weight once loaded: 6 kg (handle + 2 screws).
+- Maximum: 36 kg per dumbbell (72 kg across a pair).
+- Both sides are always balanced with an identical load.
+
+## How loading is calculated
+1. Divide the total weight by the number of dumbbells (1 or 2).
+2. A 4 kg per-dumbbell weight is a bare handle: no screws, no plates.
+3. Otherwise subtract the fixed 6 kg; the remainder must be an even number of kilograms so it splits evenly across both sides.
+4. Per side: use one 1 kg plate for an odd kilogram, then fill the rest with 2 kg plates.
+5. Weights that cannot be built are flagged, with the nearest valid totals above and below offered as one-click fixes.
+
+## Compatible dumbbell brands
+This is the Eisenlink adjustable square dumbbell (A030), also sold rebranded as Zipro. The calculator fits any adjustable dumbbell using a 4 kg handle, 1 kg screw caps, and 1 kg / 2 kg plates:
+Eisenlink, Zipro.
+
+## Files
+- /index.html: the calculator (self-contained, HTML + CSS + JS in one file).

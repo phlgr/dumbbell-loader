@@ -1,0 +1,882 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Dumbbell Loader — Plate Calculator for the Eisenlink Adjustable Square Dumbbell</title>
+<meta name="description" content="Free plate-loading calculator for the Eisenlink adjustable square dumbbell (also sold as Zipro): a 4 kg screw-cap handle with 1 kg and 2 kg cast-iron plates, up to 36 kg. Enter a target weight and get the exact, balanced plate stack per dumbbell." />
+<meta name="keywords" content="dumbbell calculator, plate loading calculator, adjustable square dumbbell, screw cap dumbbell, spinlock dumbbell, quadratische Kurzhantel, verstellbare Kurzhantel, Eisenlink, Eisenlink A030, Zipro dumbbell, Zipro square dumbbell, cast iron adjustable dumbbell, how to load dumbbell, balanced dumbbell weight, 4kg handle 2kg plates" />
+<meta name="author" content="Dumbbell Loader" />
+<meta name="application-name" content="Dumbbell Loader" />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+<meta name="theme-color" content="#e7e3d7" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#182027" media="(prefers-color-scheme: dark)" />
+<link rel="canonical" href="https://phlgr.github.io/dumbbell-loader/" />
+
+<!-- Open Graph / social -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Dumbbell Loader" />
+<meta property="og:title" content="Dumbbell Loader — Plate Calculator for the Eisenlink Adjustable Square Dumbbell" />
+<meta property="og:description" content="Exact, balanced plate loading for the Eisenlink adjustable square dumbbell (also sold as Zipro). Enter a weight, get the stack." />
+<meta property="og:url" content="https://phlgr.github.io/dumbbell-loader/" />
+<meta property="og:locale" content="en" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Dumbbell Loader — Eisenlink Square Dumbbell Plate Calculator" />
+<meta name="twitter:description" content="Enter a target weight, get the exact balanced plate stack for the Eisenlink adjustable square dumbbell (also sold as Zipro)." />
+
+<!-- Favicon: dumbbell drawn in the sheet's petrol ink on a rounded ink tile -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='7'%20fill='%23263640'/%3E%3Cg%20fill='%23e7e3d7'%3E%3Crect%20x='13'%20y='14.5'%20width='6'%20height='3'/%3E%3Crect%20x='9'%20y='10'%20width='3'%20height='12'%20rx='.8'/%3E%3Crect%20x='20'%20y='10'%20width='3'%20height='12'%20rx='.8'/%3E%3Crect%20x='5.5'%20y='12'%20width='2.5'%20height='8'%20rx='.8'/%3E%3Crect%20x='24'%20y='12'%20width='2.5'%20height='8'%20rx='.8'/%3E%3C/g%3E%3C/svg%3E" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://phlgr.github.io/dumbbell-loader/#app",
+      "name": "Dumbbell Loader",
+      "url": "https://phlgr.github.io/dumbbell-loader/",
+      "applicationCategory": "HealthApplication",
+      "applicationSubCategory": "Fitness Calculator",
+      "operatingSystem": "Web",
+      "browserRequirements": "Requires JavaScript",
+      "description": "Plate-loading calculator for the Eisenlink adjustable square dumbbell (also sold as Zipro). Enter the total weight you want to lift and it returns the exact, balanced plate stack for each dumbbell — 4 kg screw-cap handle, 1 kg lock screws, plus 1 kg and 2 kg cast-iron plates, up to 36 kg per dumbbell.",
+      "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "featureList": [
+        "Balanced plate loading for one or two dumbbells",
+        "Splits total weight evenly across both dumbbells",
+        "Steppers snap to the next achievable weight",
+        "Flags weights that cannot be built and suggests the nearest valid totals",
+        "Visual per-side plate breakdown"
+      ],
+      "keywords": "dumbbell plate calculator, adjustable square dumbbell, screw cap dumbbell, spinlock dumbbell, Eisenlink, Eisenlink A030, Zipro"
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to load a spinlock dumbbell to a target weight",
+      "description": "Work out the balanced plate stack for an adjustable screw-cap dumbbell.",
+      "totalTime": "PT1M",
+      "supply": [
+        { "@type": "HowToSupply", "name": "4 kg dumbbell handle" },
+        { "@type": "HowToSupply", "name": "Two 1 kg lock screws" },
+        { "@type": "HowToSupply", "name": "2 kg weight plates" },
+        { "@type": "HowToSupply", "name": "Two 1 kg weight plates" }
+      ],
+      "step": [
+        { "@type": "HowToStep", "name": "Enter target weight", "text": "Type the total weight you want to lift and choose one or two dumbbells." },
+        { "@type": "HowToStep", "name": "Account for the fixed weight", "text": "Every loaded dumbbell starts at 6 kg: a 4 kg handle plus two mandatory 1 kg lock screws. A bare 4 kg handle is the only screw-free option." },
+        { "@type": "HowToStep", "name": "Split the remainder", "text": "Divide the weight left over after the fixed 6 kg equally between the two sides." },
+        { "@type": "HowToStep", "name": "Fill each side", "text": "Use a 1 kg plate for any odd kilogram, then fill the rest of each side with 2 kg plates. Keep both sides identical." }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Which dumbbells does this calculator work with?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is built for the Eisenlink adjustable square dumbbell (the A030) — a 4 kg screw-cap handle loaded with cast-iron plates — which is also sold under the Zipro brand. It applies to any adjustable dumbbell that uses a 4 kg handle, 1 kg lock screws, and 1 kg and 2 kg plates."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does the calculator always add 6 kg?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A loaded dumbbell is a 4 kg handle plus two 1 kg lock screws that hold the plates on — 6 kg fixed before any plates. The only exception is the bare 4 kg handle with no plates, which needs no screws."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the maximum weight per dumbbell?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "36 kg per dumbbell. With two dumbbells the maximum total is 72 kg, split evenly."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why are some weights not achievable?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "After the fixed 6 kg, the remaining weight must be an even number of kilograms so it can be split identically across both sides. Odd remainders can't be balanced with the available plates, so the tool suggests the nearest valid weights above and below instead."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    /* light: manila worksheet */
+    --ink-rgb: 38, 54, 64;
+    --paper: #e7e3d7;
+    --paper-2: #ddd8c9;
+    --ink: #263640;
+    --ink-soft: #5d6b72;
+    --ink-faint: #8b8c7f;
+    --line: rgba(var(--ink-rgb), 0.24);
+    --line-soft: rgba(var(--ink-rgb), 0.13);
+    --red: #a53a30;
+    --red-soft: rgba(165, 58, 48, 0.09);
+    --mono: "IBM Plex Mono", ui-monospace, "Courier New", monospace;
+    --sans: "IBM Plex Sans", system-ui, sans-serif;
+    --icon-sun: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Ccircle%20cx='12'%20cy='12'%20r='5'%20fill='black'/%3E%3Cg%20stroke='black'%20stroke-width='2'%20stroke-linecap='round'%3E%3Cline%20x1='12'%20y1='2'%20x2='12'%20y2='4.5'/%3E%3Cline%20x1='12'%20y1='19.5'%20x2='12'%20y2='22'/%3E%3Cline%20x1='2'%20y1='12'%20x2='4.5'%20y2='12'/%3E%3Cline%20x1='19.5'%20y1='12'%20x2='22'%20y2='12'/%3E%3Cline%20x1='4.9'%20y1='4.9'%20x2='6.7'%20y2='6.7'/%3E%3Cline%20x1='17.3'%20y1='17.3'%20x2='19.1'%20y2='19.1'/%3E%3Cline%20x1='19.1'%20y1='4.9'%20x2='17.3'%20y2='6.7'/%3E%3Cline%20x1='6.7'%20y1='17.3'%20x2='4.9'%20y2='19.1'/%3E%3C/g%3E%3C/svg%3E");
+    --icon-moon: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cpath%20fill='black'%20d='M21%2012.79A9%209%200%201%201%2011.21%203%207%207%200%200%200%2021%2012.79z'/%3E%3C/svg%3E");
+  }
+
+  /* dark: blueprint counterpart. Applied by system preference unless the
+     toggle has forced light, and always when the toggle forces dark. */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink-rgb: 216, 224, 222;
+      --paper: #182027;
+      --paper-2: #202a31;
+      --ink: #d8e0de;
+      --ink-soft: #94a3a6;
+      --ink-faint: #667579;
+      --red: #e59188;
+      --red-soft: rgba(229, 145, 136, 0.13);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink-rgb: 216, 224, 222;
+    --paper: #182027;
+    --paper-2: #202a31;
+    --ink: #d8e0de;
+    --ink-soft: #94a3a6;
+    --ink-faint: #667579;
+    --red: #e59188;
+    --red-soft: rgba(229, 145, 136, 0.13);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    padding: clamp(18px, 4vw, 46px) 18px 90px;
+  }
+
+  .sheet {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  /* ---- Title block (like a drawing sheet header) ---- */
+  .titleblock {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 14px;
+  }
+  .tb-main h1 {
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: clamp(21px, 4.5vw, 27px);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .tb-main p {
+    margin: 4px 0 0;
+    color: var(--ink-soft);
+    font-size: 12.5px;
+    max-width: 40ch;
+  }
+  .tb-right { display: flex; align-items: flex-end; gap: 14px; }
+  .tb-meta {
+    margin: 0;
+    display: grid;
+    gap: 2px;
+    text-align: right;
+    font-size: 11px;
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+  .tb-meta div { display: flex; gap: 8px; justify-content: flex-end; }
+  .tb-meta dt { color: var(--ink-faint); }
+  .tb-meta dd { margin: 0; color: var(--ink); }
+  @media (max-width: 520px) { .tb-meta { display: none; } }
+
+  .theme-toggle {
+    flex: 0 0 auto;
+    width: 34px; height: 34px;
+    background: transparent;
+    border: 1.5px solid var(--ink);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    padding: 0;
+    transition: background 0.12s;
+  }
+  .theme-toggle:hover { background: var(--ink); }
+  .theme-toggle:hover .ti { color: var(--paper); }
+  .theme-toggle:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+  /* Sun in light mode, moon in dark mode. Drawn from a single span via
+     an inline SVG mask so it recolours with `color` (and on hover). */
+  .ti {
+    display: block; width: 17px; height: 17px;
+    color: var(--ink);
+    background: currentColor;
+    -webkit-mask: var(--icon-sun) center / contain no-repeat;
+    mask: var(--icon-sun) center / contain no-repeat;
+  }
+  :root[data-theme="dark"] .ti { -webkit-mask-image: var(--icon-moon); mask-image: var(--icon-moon); }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .ti { -webkit-mask-image: var(--icon-moon); mask-image: var(--icon-moon); }
+  }
+
+  /* ---- Entry form ---- */
+  .entry {
+    border-bottom: 1px solid var(--line);
+    margin: 0 0 6px;
+  }
+  .line-field {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--line-soft);
+    flex-wrap: wrap;
+  }
+  .line-field:last-child { border-bottom: none; }
+  .fl-label {
+    flex: 0 0 128px;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .fl-control { flex: 1; display: flex; align-items: center; gap: 12px; min-width: 220px; }
+
+  #total {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 1;
+    width: 118px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--ink);
+    color: var(--ink);
+    padding: 0 4px 3px;
+    text-align: center;
+  }
+  #total:focus { outline: none; border-bottom-color: var(--red); }
+  #total::-webkit-outer-spin-button,
+  #total::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  #total { -moz-appearance: textfield; appearance: textfield; }
+  .fl-unit { font-size: 13px; color: var(--ink-soft); margin-left: -4px; }
+
+  .stepper {
+    flex: 0 0 auto;
+    width: 34px; height: 34px;
+    background: transparent;
+    border: 1.5px solid var(--ink);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 22px; font-weight: 600; line-height: 1;
+    cursor: pointer;
+    padding: 0 0 2px;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.12s, color 0.12s;
+  }
+  .stepper:hover:not(:disabled) { background: var(--ink); color: var(--paper); }
+  .stepper:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+  .stepper:disabled { border-color: var(--line); color: var(--ink-faint); cursor: not-allowed; }
+
+  .opts { display: flex; gap: 0; }
+  .opts button {
+    background: transparent;
+    border: 1.5px solid var(--ink);
+    border-right-width: 0;
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: 13px;
+    padding: 8px 16px;
+    cursor: pointer;
+    display: flex; flex-direction: column; align-items: center; gap: 1px;
+    transition: background 0.12s, color 0.12s;
+  }
+  .opts button:last-child { border-right-width: 1.5px; }
+  .opts button .cap {
+    font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint);
+  }
+  .opts button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+  .opts button[aria-pressed="true"] .cap { color: inherit; opacity: 0.68; }
+  .opts button:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+
+  /* ---- Correction note (warnings) ---- */
+  .note {
+    border-left: 2px solid var(--red);
+    background: var(--red-soft);
+    padding: 12px 14px;
+    margin: 20px 0;
+  }
+  .note-tag {
+    font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--red); margin: 0 0 4px;
+  }
+  .note-msg { margin: 0; color: var(--ink); font-size: 13px; }
+  .fixes { margin: 14px 0 0; display: flex; flex-direction: column; gap: 9px; }
+  .fixes .lbl {
+    text-transform: uppercase; letter-spacing: 0.12em; font-size: 10.5px; color: var(--red);
+  }
+  .fix-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .fix {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: transparent;
+    border: 1.5px solid var(--red);
+    color: var(--ink);
+    font-family: var(--mono); font-size: 14px; font-weight: 500;
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: background 0.12s, color 0.12s;
+  }
+  .fix .dir {
+    font-family: var(--sans); font-weight: 700; font-size: 15px; line-height: 1; color: var(--red);
+  }
+  .fix .arrow { color: var(--red); font-size: 13px; margin-left: 2px; opacity: 0.8; }
+  .fix:hover, .fix:focus-visible { background: var(--red); color: var(--paper); }
+  .fix:hover .dir, .fix:focus-visible .dir,
+  .fix:hover .arrow, .fix:focus-visible .arrow { color: var(--paper); }
+  .fix:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+  /* ---- Spec table (summary) ---- */
+  .spec { width: 100%; border-collapse: collapse; margin: 22px 0 30px; }
+  .spec tr { border-bottom: 1px solid var(--line-soft); }
+  .spec tr:first-child { border-top: 1px solid var(--line); }
+  .spec th {
+    text-align: left; font-weight: 400;
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft);
+    padding: 11px 0; width: 42%;
+  }
+  .spec td { padding: 11px 0; vertical-align: baseline; }
+  .spec td.val { font-family: var(--sans); font-weight: 700; font-size: 19px; white-space: nowrap; }
+  .spec td.val u { font-family: var(--mono); font-weight: 400; font-size: 12px; color: var(--ink-soft); text-decoration: none; margin-left: 3px; }
+  .spec td.note-cell { text-align: right; color: var(--ink-soft); font-size: 12.5px; }
+
+  /* ---- Figure: technical drawing ---- */
+  .stage { display: flex; flex-direction: column; gap: 26px; }
+
+  .figure {
+    border: 1px solid var(--line);
+    position: relative;
+    padding: 30px 16px 20px;
+    background: rgba(var(--ink-rgb), 0.025);
+  }
+  .fig-cap {
+    position: absolute; top: 8px; left: 12px;
+    font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint);
+  }
+  .fig-inner {
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    min-height: 150px;
+    overflow-x: auto;
+  }
+  /* center axis line */
+  .axis {
+    position: absolute; left: 6%; right: 6%; top: 50%; height: 0;
+    border-top: 1px solid var(--ink-soft);
+    background-image: none;
+    opacity: 0.55;
+  }
+  .axis::before {
+    content: ""; position: absolute; inset: -1px 0 0 0; height: 0;
+    border-top: 1px dashed var(--ink);
+    /* dash-dot centerline feel */
+  }
+
+  .dumbbell { display: flex; align-items: center; position: relative; z-index: 1; }
+  .side { display: flex; align-items: center; }
+  .side.left { flex-direction: row-reverse; }
+
+  .plate {
+    flex: 0 0 auto;
+    margin: 0 1.5px;
+    border: 1.5px solid var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .plate .stamp {
+    font-family: var(--sans);
+    font-weight: 600;
+    transform: rotate(-90deg);
+    color: var(--ink);
+    line-height: 1;
+  }
+  .plate.p2 { width: 22px; height: 104px; background: rgba(var(--ink-rgb), 0.11); }
+  .plate.p2 .stamp { font-size: 14px; }
+  .plate.p1 { width: 12px; height: 104px; background: rgba(var(--ink-rgb), 0.05); }
+  .plate.p1 .stamp { font-size: 11px; color: var(--ink-soft); }
+
+  /* screw / lock collar — hatched narrow cap */
+  .screw {
+    flex: 0 0 auto;
+    width: 13px; height: 48px; margin: 0 1px 0 4px;
+    border: 1.5px solid var(--ink);
+    background: repeating-linear-gradient(180deg, transparent 0 3px, rgba(var(--ink-rgb),0.55) 3px 4px);
+    position: relative;
+  }
+  .side.left .screw { margin: 0 4px 0 1px; }
+
+  /* grip — section-hatched shaft */
+  .grip {
+    flex: 0 0 auto;
+    width: 100px; height: 26px;
+    border: 1.5px solid var(--ink);
+    background: repeating-linear-gradient(45deg, transparent 0 4px, rgba(var(--ink-rgb),0.4) 4px 5px);
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .grip .kg {
+    font-family: var(--sans); font-weight: 700; font-size: 12px;
+    color: var(--ink); background: var(--paper);
+    padding: 1px 5px; z-index: 1;
+  }
+  .collar {
+    flex: 0 0 auto;
+    width: 8px; height: 58px;
+    border: 1.5px solid var(--ink);
+    background: rgba(var(--ink-rgb), 0.2);
+  }
+
+  .fig-foot {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 18px;
+    margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line-soft);
+    font-size: 13px;
+  }
+  .fig-foot .recipe .mut { color: var(--ink-faint); }
+  .fig-foot .per-side { margin-left: auto; color: var(--ink-soft); font-size: 12.5px; }
+  .fig-foot .per-side b { font-family: var(--sans); font-weight: 700; color: var(--ink); }
+
+  .placeholder {
+    border: 1px dashed var(--line);
+    padding: 44px 20px; text-align: center;
+    color: var(--ink-soft); font-size: 13px;
+  }
+
+  /* ---- Notes / compatibility (SEO + genuinely useful) ---- */
+  .notes { margin-top: 46px; border-top: 2px solid var(--ink); padding-top: 18px; }
+  .notes h2 {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--ink-soft); margin: 0 0 14px;
+  }
+  .notes h3 { font-family: var(--sans); font-weight: 600; font-size: 15px; margin: 20px 0 5px; }
+  .notes p { margin: 0 0 9px; font-size: 13px; color: var(--ink); max-width: 64ch; line-height: 1.65; }
+  .notes .brands { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 4px; padding: 0; list-style: none; }
+  .notes .brands li {
+    font-family: var(--mono); font-size: 11.5px; color: var(--ink-soft);
+    border: 1px solid var(--line); padding: 3px 9px;
+  }
+
+  footer {
+    margin-top: 42px; padding-top: 14px; border-top: 1px solid var(--line-soft);
+    font-size: 11px; color: var(--ink-faint); line-height: 1.9;
+  }
+</style>
+</head>
+<body>
+  <div class="sheet">
+    <header class="titleblock">
+      <div class="tb-main">
+        <h1>Dumbbell Loader</h1>
+        <p>Plate loading chart for Eisenlink screw-lock handles.</p>
+      </div>
+      <div class="tb-right">
+        <button type="button" id="theme" class="theme-toggle" aria-label="Switch colour theme">
+          <span class="ti" aria-hidden="true"></span>
+        </button>
+        <dl class="tb-meta">
+          <div><dt>Handle</dt><dd>4 kg</dd></div>
+          <div><dt>Screw</dt><dd>1 kg × 2</dd></div>
+          <div><dt>Ceiling</dt><dd>36 kg / db</dd></div>
+        </dl>
+      </div>
+    </header>
+
+    <section class="entry">
+      <div class="line-field">
+        <span class="fl-label" id="wl">Target weight</span>
+        <div class="fl-control" role="group" aria-labelledby="wl">
+          <button type="button" id="minus" class="stepper" aria-label="Next lighter valid weight">−</button>
+          <input id="total" type="number" inputmode="decimal" min="0" step="1" value="20" aria-describedby="warn-region" />
+          <span class="fl-unit">kg total</span>
+          <button type="button" id="plus" class="stepper" aria-label="Next heavier valid weight">+</button>
+        </div>
+      </div>
+      <div class="line-field">
+        <span class="fl-label" id="cl">Dumbbells</span>
+        <div class="opts" role="group" aria-labelledby="cl">
+          <button type="button" data-count="1" aria-pressed="false">1<span class="cap">handle</span></button>
+          <button type="button" data-count="2" aria-pressed="true">2<span class="cap">pair</span></button>
+        </div>
+      </div>
+    </section>
+
+    <div id="warn-region" aria-live="polite"></div>
+    <div id="summary"></div>
+    <div id="stage" class="stage"></div>
+
+    <section class="notes">
+      <h2>Compatibility</h2>
+      <p>
+        Built for the Eisenlink adjustable square dumbbell (the A030) — a 4&nbsp;kg screw-cap handle
+        loaded with cast-iron plates. The same set is rebranded and also sold as:
+      </p>
+      <ul class="brands">
+        <li>Zipro</li>
+      </ul>
+      <p>
+        The math fits any adjustable dumbbell with a 4&nbsp;kg handle, 1&nbsp;kg screw caps and
+        1&nbsp;kg / 2&nbsp;kg plates — check yours matches before trusting the numbers.
+      </p>
+    </section>
+  </div>
+
+<script>
+  "use strict";
+
+  const HANDLE = 4;
+  const SCREW = 1;
+  const FIXED = HANDLE + 2 * SCREW; // 6kg once any plate is on
+  const MAX_PER = 36;
+
+  const state = { count: 2 };
+
+  const els = {
+    total: document.getElementById("total"),
+    minus: document.getElementById("minus"),
+    plus: document.getElementById("plus"),
+    toggle: document.querySelectorAll(".opts button"),
+    warn: document.getElementById("warn-region"),
+    summary: document.getElementById("summary"),
+    stage: document.getElementById("stage"),
+  };
+
+  // --- Core rules --------------------------------------------------------
+
+  // All achievable per-dumbbell weights: bare 4kg handle, then 6,8,...,36.
+  function validPerDumbbell() {
+    const out = [HANDLE];
+    for (let w = FIXED; w <= MAX_PER; w += 2) out.push(w);
+    return out;
+  }
+
+  // Resolve a per-dumbbell target into a concrete load, or null if impossible.
+  function loadFor(w) {
+    if (w === HANDLE) {
+      return { bare: true, screws: false, fixed: HANDLE, perSide: 0, twos: 0, ones: 0 };
+    }
+    if (Number.isInteger(w) && w >= FIXED && w <= MAX_PER && (w - FIXED) % 2 === 0) {
+      const perSide = (w - FIXED) / 2;
+      const ones = perSide % 2 === 1 ? 1 : 0; // one 1kg plate covers the odd kg
+      const twos = (perSide - ones) / 2;
+      return { bare: false, screws: true, fixed: FIXED, perSide, twos, ones };
+    }
+    return null;
+  }
+
+  function validTotals(count) {
+    return validPerDumbbell().map((w) => w * count);
+  }
+
+  // Nearest valid totals strictly below / above a target, given the count.
+  function neighbours(target, count) {
+    const totals = validTotals(count);
+    let lower = null, higher = null;
+    for (const t of totals) {
+      if (t < target) lower = t;
+      if (t > target && higher === null) higher = t;
+    }
+    return { lower, higher };
+  }
+
+  // --- Steppers ----------------------------------------------------------
+
+  // Jump the input to the next achievable total up (+1) or down (-1),
+  // snapping a mid-air value onto the valid grid; disabled at either end.
+  function step(dir) {
+    const raw = els.total.value.trim();
+    const cur = raw === "" ? NaN : Number(raw);
+    const count = state.count;
+    let target;
+    if (!Number.isFinite(cur)) {
+      target = dir > 0 ? validTotals(count)[0] : null; // from blank, + starts at the lightest
+    } else {
+      const nb = neighbours(cur, count);
+      target = dir > 0 ? nb.higher : nb.lower;
+    }
+    if (target === null || target === undefined) return;
+    els.total.value = target;
+    render();
+    els.total.focus();
+  }
+
+  function updateSteppers() {
+    const raw = els.total.value.trim();
+    const cur = raw === "" ? NaN : Number(raw);
+    const count = state.count;
+    if (!Number.isFinite(cur)) {
+      els.minus.disabled = true;
+      els.plus.disabled = false;
+      return;
+    }
+    const nb = neighbours(cur, count);
+    els.minus.disabled = nb.lower === null;
+    els.plus.disabled = nb.higher === null;
+  }
+
+  // --- Rendering ---------------------------------------------------------
+
+  function fmt(n) {
+    return Number.isInteger(n) ? String(n) : n.toFixed(1);
+  }
+
+  function render() {
+    const raw = els.total.value.trim();
+    const total = raw === "" ? NaN : Number(raw);
+    const count = state.count;
+    const maxTotal = MAX_PER * count;
+
+    updateSteppers();
+    els.warn.innerHTML = "";
+    els.summary.innerHTML = "";
+    els.stage.innerHTML = "";
+
+    if (!Number.isFinite(total) || total <= 0) {
+      els.stage.innerHTML =
+        '<div class="placeholder">Enter a target weight to draw the plate loading.</div>';
+      return;
+    }
+
+    if (total > maxTotal) {
+      note(
+        "Over the ceiling",
+        `The most ${count} dumbbell${count > 1 ? "s" : ""} can hold is ${maxTotal} kg ` +
+          `(${MAX_PER} kg each). Pick a lower total.`,
+        neighbours(total, count)
+      );
+      return;
+    }
+
+    const perDumbbell = total / count;
+    const load = loadFor(perDumbbell);
+
+    if (!load) {
+      note("Not achievable", reasonFor(total, perDumbbell, count), neighbours(total, count));
+      return;
+    }
+
+    renderSummary(total, count, perDumbbell, load);
+    renderDumbbells(count, perDumbbell, load);
+  }
+
+  function reasonFor(total, perDumbbell, count) {
+    if (count > 1 && total % count !== 0) {
+      return (
+        `${fmt(total)} kg doesn't split evenly across ${count} dumbbells ` +
+        `(${fmt(perDumbbell)} kg each). Both must carry an identical, whole load.`
+      );
+    }
+    if (perDumbbell < HANDLE) {
+      return (
+        `${fmt(perDumbbell)} kg per dumbbell is under the bare handle (${HANDLE} kg), ` +
+        `the lightest load there is.`
+      );
+    }
+    return (
+      `${fmt(perDumbbell)} kg per dumbbell can't be built. After the 6 kg handle and screws, ` +
+      `the remainder must be an even number of kilograms so it splits across both sides.`
+    );
+  }
+
+  function note(tag, msg, nb) {
+    const box = document.createElement("div");
+    box.className = "note";
+    box.innerHTML =
+      `<p class="note-tag">${tag}</p><p class="note-msg">${msg}</p>`;
+
+    if (nb && (nb.lower !== null || nb.higher !== null)) {
+      const fixes = document.createElement("div");
+      fixes.className = "fixes";
+      fixes.innerHTML = '<span class="lbl">Use a valid weight instead</span>';
+      const row = document.createElement("div");
+      row.className = "fix-row";
+      if (nb.lower !== null) row.appendChild(fixBtn(nb.lower, "lower"));
+      if (nb.higher !== null) row.appendChild(fixBtn(nb.higher, "higher"));
+      fixes.appendChild(row);
+      box.appendChild(fixes);
+    }
+    els.warn.appendChild(box);
+  }
+
+  function fixBtn(value, dir) {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "fix";
+    b.innerHTML =
+      `<span class="dir">${dir === "lower" ? "−" : "+"}</span>` +
+      `${value} kg` +
+      `<span class="arrow">${dir === "lower" ? "go lower" : "go higher"}</span>`;
+    b.addEventListener("click", () => {
+      els.total.value = value;
+      render();
+      els.total.focus();
+    });
+    return b;
+  }
+
+  function renderSummary(total, count, perDumbbell, load) {
+    const fixedNote = load.bare ? "bare handle, no screws" : "handle + 2 screws";
+    const perSideRecipe = load.bare ? "no plates" : recipeShort(load);
+    els.summary.innerHTML = `
+      <table class="spec">
+        <tr>
+          <th>Per dumbbell</th>
+          <td class="val">${fmt(perDumbbell)}<u>kg</u></td>
+          <td class="note-cell">${count === 1 ? "single handle" : "× " + count + " identical"}</td>
+        </tr>
+        <tr>
+          <th>Fixed weight</th>
+          <td class="val">${load.fixed}<u>kg</u></td>
+          <td class="note-cell">${fixedNote}</td>
+        </tr>
+        <tr>
+          <th>Plates per side</th>
+          <td class="val">${load.bare ? "—" : fmt(load.perSide) + "<u>kg</u>"}</td>
+          <td class="note-cell">${perSideRecipe}</td>
+        </tr>
+        <tr>
+          <th>Overall total</th>
+          <td class="val">${fmt(total)}<u>kg</u></td>
+          <td class="note-cell">${count} dumbbell${count > 1 ? "s" : ""}</td>
+        </tr>
+      </table>`;
+  }
+
+  function recipeShort(load) {
+    const parts = [];
+    if (load.twos) parts.push(`${load.twos}× 2 kg`);
+    if (load.ones) parts.push(`${load.ones}× 1 kg`);
+    return parts.length ? parts.join(" + ") : "screws only";
+  }
+
+  function renderDumbbells(count, perDumbbell, load) {
+    for (let i = 0; i < count; i++) {
+      const fig = document.createElement("div");
+      fig.className = "figure";
+
+      const cap = count > 1 ? `Fig. ${i + 1} — dumbbell ${i + 1} of ${count}` : "Fig. 1 — assembled dumbbell";
+
+      const inner = document.createElement("div");
+      inner.className = "fig-inner";
+      inner.innerHTML = '<div class="axis"></div>';
+      inner.appendChild(buildDumbbell(perDumbbell, load));
+
+      const recipeHtml = load.bare
+        ? '<span class="recipe"><span class="mut">no plates —</span> bare 4 kg handle</span>'
+        : `<span class="recipe">${recipeShort(load).replace(/×/g, '<span class="mut">×</span>')}` +
+          ` <span class="mut">per side</span></span>`;
+      const perSideHtml = load.bare
+        ? ""
+        : `<span class="per-side">per side <b>${fmt(load.perSide)} kg</b></span>`;
+
+      fig.innerHTML = `<span class="fig-cap">${cap}</span>`;
+      fig.appendChild(inner);
+      const foot = document.createElement("div");
+      foot.className = "fig-foot";
+      foot.innerHTML = recipeHtml + perSideHtml;
+      fig.appendChild(foot);
+
+      els.stage.appendChild(fig);
+    }
+  }
+
+  // One side, ordered from the grip outward: 2kg plates, then 1kg, then screw.
+  function sideMarkup(load) {
+    let html = '<span class="collar"></span>';
+    for (let i = 0; i < load.twos; i++) {
+      html += '<span class="plate p2"><span class="stamp">2</span></span>';
+    }
+    if (load.ones) {
+      html += '<span class="plate p1"><span class="stamp">1</span></span>';
+    }
+    if (load.screws) {
+      html += '<span class="screw" title="1 kg lock screw"></span>';
+    }
+    return html;
+  }
+
+  function buildDumbbell(perDumbbell, load) {
+    const db = document.createElement("div");
+    db.className = "dumbbell";
+    const side = sideMarkup(load);
+    db.innerHTML =
+      `<span class="side left">${side}</span>` +
+      `<span class="grip"><span class="kg">${fmt(perDumbbell)} kg</span></span>` +
+      `<span class="side right">${side}</span>`;
+    return db;
+  }
+
+  // --- Wiring ------------------------------------------------------------
+
+  els.total.addEventListener("input", render);
+  els.minus.addEventListener("click", () => step(-1));
+  els.plus.addEventListener("click", () => step(1));
+
+  // Theme: follow the system by default, let the toggle force light/dark.
+  const root = document.documentElement;
+  const themeBtn = document.getElementById("theme");
+  const media = window.matchMedia("(prefers-color-scheme: dark)");
+  function store(v) { try { v ? localStorage.setItem("dbl-theme", v) : localStorage.removeItem("dbl-theme"); } catch (e) {} }
+  function effectiveDark() {
+    const t = root.getAttribute("data-theme");
+    return t ? t === "dark" : media.matches;
+  }
+  function labelTheme() {
+    themeBtn.setAttribute("aria-label", effectiveDark() ? "Switch to light theme" : "Switch to dark theme");
+  }
+  try {
+    const saved = localStorage.getItem("dbl-theme");
+    if (saved === "light" || saved === "dark") root.setAttribute("data-theme", saved);
+  } catch (e) {}
+  labelTheme();
+  themeBtn.addEventListener("click", () => {
+    const next = effectiveDark() ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    store(next);
+    labelTheme();
+  });
+  media.addEventListener("change", labelTheme);
+
+  els.toggle.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      state.count = Number(btn.dataset.count);
+      els.toggle.forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
+      render();
+    });
+  });
+
+  render();
+</script>
+</body>
+</html>
