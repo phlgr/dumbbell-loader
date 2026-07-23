@@ -23,17 +23,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Assemble site and stamp service-worker version
+      - name: Stamp build version into the service worker and footer
         run: |
-          mkdir -p _site/fonts
-          cp index.html sw.js manifest.webmanifest llms.txt \
-             icon-192.png icon-512.png icon-512-maskable.png _site/
-          cp fonts/*.woff2 _site/fonts/
-          sed -i "s/__BUILD__/${GITHUB_SHA}/g" _site/sw.js
+          sed -i "s/__BUILD__/${GITHUB_SHA}/g" public/sw.js
+          sed -i "s/__BUILD__/${GITHUB_SHA:0:7}/g" public/index.html
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: public
       - id: deployment
         uses: actions/deploy-pages@v4

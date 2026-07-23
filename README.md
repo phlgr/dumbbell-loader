@@ -13,4 +13,4 @@ Enter the total weight you want to lift and pick one or two dumbbells; it works 
 - Plates: unlimited 2 kg; exactly two 1 kg (one per side) to cover an odd kilogram.
 - Both sides always balanced. Max 36 kg per dumbbell (72 kg across a pair).
 
-Single self-contained file — `index.html`, no build step or dependencies.
+The site lives in `public/` (`index.html` is self-contained HTML/CSS/JS; fonts and icons alongside). GitHub Actions stamps the commit SHA into the service worker and footer, then deploys `public/` to GitHub Pages — no build step or dependencies.

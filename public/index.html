@@ -30,7 +30,7 @@
 
 <!-- Progressive web app -->
 <link rel="manifest" href="manifest.webmanifest" />
-<link rel="apple-touch-icon" href="icon-192.png" />
+<link rel="apple-touch-icon" href="icons/icon-192.png" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Dumbbell" />
@@ -503,6 +503,7 @@
   }
   footer a { color: var(--ink-soft); text-decoration: underline; text-underline-offset: 2px; }
   footer a:hover { color: var(--red); }
+  footer code { font-family: var(--mono); color: var(--ink-soft); }
 </style>
 </head>
 <body>
@@ -563,7 +564,8 @@
     </section>
 
     <footer>
-      Source on <a href="https://github.com/phlgr/dumbbell-loader" target="_blank" rel="noopener">GitHub</a>.
+      Source on <a href="https://github.com/phlgr/dumbbell-loader" target="_blank" rel="noopener">GitHub</a>
+      · build <code id="build">__BUILD__</code>
     </footer>
   </div>
 
@@ -876,6 +878,10 @@
   });
 
   render();
+
+  // Show "dev" for the build marker when running unbuilt (placeholder intact).
+  const buildEl = document.getElementById("build");
+  if (buildEl && buildEl.textContent.trim() === "__BUILD__") buildEl.textContent = "dev";
 
   // Progressive web app: register the service worker and keep it fresh.
   // iOS resumes the installed app from a snapshot instead of reloading, so we
