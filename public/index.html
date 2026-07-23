@@ -879,9 +879,11 @@
 
   render();
 
-  // Show "dev" for the build marker when running unbuilt (placeholder intact).
+  // Show "dev" for the build marker when unbuilt (the deploy stamps a 7-char
+  // SHA). Avoid literal-matching the placeholder token — the build-time sed
+  // would rewrite that too and clobber the real SHA.
   const buildEl = document.getElementById("build");
-  if (buildEl && buildEl.textContent.trim() === "__BUILD__") buildEl.textContent = "dev";
+  if (buildEl && !/^[0-9a-f]{7}$/i.test(buildEl.textContent.trim())) buildEl.textContent = "dev";
 
   // Progressive web app: register the service worker and keep it fresh.
   // iOS resumes the installed app from a snapshot instead of reloading, so we
