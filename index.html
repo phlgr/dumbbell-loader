@@ -35,6 +35,9 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Dumbbell" />
 
+<!-- Privacy-friendly analytics -->
+<script defer data-domain="dumbbell.gartz.dev" src="https://apps.gartz.dev/js/script.js"></script>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -339,31 +342,25 @@
   }
   .note-tag {
     font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--red); margin: 0 0 4px;
+    color: var(--red); margin: 0 0 12px;
   }
-  .note-msg { margin: 0; color: var(--ink); font-size: 13px; }
-  .fixes { margin: 14px 0 0; display: flex; flex-direction: column; gap: 9px; }
-  .fixes .lbl {
-    text-transform: uppercase; letter-spacing: 0.12em; font-size: 10.5px; color: var(--red);
-  }
-  .fix-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .fix-row { display: flex; gap: 8px; }
   .fix {
-    display: inline-flex; align-items: center; gap: 8px;
+    flex: 1 1 0; min-width: 0;
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
     background: transparent;
     border: 1.5px solid var(--red);
     color: var(--ink);
-    font-family: var(--mono); font-size: 14px; font-weight: 500;
-    padding: 8px 14px;
+    font-family: var(--mono); font-size: 15px; font-weight: 500;
+    padding: 10px 14px;
     cursor: pointer;
     transition: background 0.12s, color 0.12s;
   }
   .fix .dir {
-    font-family: var(--sans); font-weight: 700; font-size: 15px; line-height: 1; color: var(--red);
+    font-family: var(--sans); font-weight: 700; font-size: 16px; line-height: 1; color: var(--red);
   }
-  .fix .arrow { color: var(--red); font-size: 13px; margin-left: 2px; opacity: 0.8; }
   .fix:hover, .fix:focus-visible { background: var(--red); color: var(--paper); }
-  .fix:hover .dir, .fix:focus-visible .dir,
-  .fix:hover .arrow, .fix:focus-visible .arrow { color: var(--paper); }
+  .fix:hover .dir, .fix:focus-visible .dir { color: var(--paper); }
   .fix:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 
   /* ---- Spec table (summary) ---- */
@@ -377,6 +374,7 @@
   }
   .spec td { padding: 11px 0; vertical-align: baseline; }
   .spec td.val { font-family: var(--sans); font-weight: 700; font-size: 19px; white-space: nowrap; }
+  .spec td.val.recipe { font-size: 15px; white-space: normal; line-height: 1.25; }
   .spec td.val u { font-family: var(--mono); font-weight: 400; font-size: 12px; color: var(--ink-soft); text-decoration: none; margin-left: 3px; }
   .spec td.note-cell { text-align: right; color: var(--ink-soft); font-size: 12.5px; }
 
@@ -393,12 +391,6 @@
     display: block;
     font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint);
   }
-  .fig-repeat {
-    margin: 10px 0 0; padding-left: 12px;
-    font-size: 12.5px; color: var(--ink-soft);
-    border-left: 2px solid var(--ink-soft);
-  }
-  .fig-repeat b { color: var(--ink); font-weight: 600; }
   .fig-inner {
     position: relative;
     display: flex; align-items: center; justify-content: center;
@@ -505,6 +497,8 @@
     margin-top: 42px; padding-top: 14px; border-top: 1px solid var(--line-soft);
     font-size: 11px; color: var(--ink-faint); line-height: 1.9;
   }
+  footer a { color: var(--ink-soft); text-decoration: underline; text-underline-offset: 2px; }
+  footer a:hover { color: var(--red); }
 </style>
 </head>
 <body>
@@ -563,6 +557,10 @@
         1&nbsp;kg / 2&nbsp;kg plates — check yours matches before trusting the numbers.
       </p>
     </section>
+
+    <footer>
+      Source on <a href="https://github.com/phlgr/dumbbell-loader" target="_blank" rel="noopener">GitHub</a>.
+    </footer>
   </div>
 
 <script>
@@ -682,12 +680,7 @@
     }
 
     if (total > maxTotal) {
-      note(
-        "Over the ceiling",
-        `The most ${count} dumbbell${count > 1 ? "s" : ""} can hold is ${maxTotal} kg ` +
-          `(${MAX_PER} kg each). Pick a lower total.`,
-        neighbours(total, count)
-      );
+      note("Over the max", neighbours(total, count));
       return;
     }
 
@@ -695,7 +688,7 @@
     const load = loadFor(perDumbbell);
 
     if (!load) {
-      note("Not achievable", reasonFor(total, perDumbbell, count), neighbours(total, count));
+      note("Not achievable", neighbours(total, count));
       return;
     }
 
@@ -703,41 +696,17 @@
     renderDumbbells(count, perDumbbell, load);
   }
 
-  function reasonFor(total, perDumbbell, count) {
-    if (count > 1 && total % count !== 0) {
-      return (
-        `${fmt(total)} kg doesn't split evenly across ${count} dumbbells ` +
-        `(${fmt(perDumbbell)} kg each). Both must carry an identical, whole load.`
-      );
-    }
-    if (perDumbbell < HANDLE) {
-      return (
-        `${fmt(perDumbbell)} kg per dumbbell is under the bare handle (${HANDLE} kg), ` +
-        `the lightest load there is.`
-      );
-    }
-    return (
-      `${fmt(perDumbbell)} kg per dumbbell can't be built. After the 6 kg handle and screws, ` +
-      `the remainder must be an even number of kilograms so it splits across both sides.`
-    );
-  }
-
-  function note(tag, msg, nb) {
+  function note(tag, nb) {
     const box = document.createElement("div");
     box.className = "note";
-    box.innerHTML =
-      `<p class="note-tag">${tag}</p><p class="note-msg">${msg}</p>`;
+    box.innerHTML = `<p class="note-tag">${tag} — pick a valid weight</p>`;
 
     if (nb && (nb.lower !== null || nb.higher !== null)) {
-      const fixes = document.createElement("div");
-      fixes.className = "fixes";
-      fixes.innerHTML = '<span class="lbl">Use a valid weight instead</span>';
       const row = document.createElement("div");
       row.className = "fix-row";
       if (nb.lower !== null) row.appendChild(fixBtn(nb.lower, "lower"));
       if (nb.higher !== null) row.appendChild(fixBtn(nb.higher, "higher"));
-      fixes.appendChild(row);
-      box.appendChild(fixes);
+      box.appendChild(row);
     }
     els.warn.appendChild(box);
   }
@@ -746,10 +715,7 @@
     const b = document.createElement("button");
     b.type = "button";
     b.className = "fix";
-    b.innerHTML =
-      `<span class="dir">${dir === "lower" ? "−" : "+"}</span>` +
-      `${value} kg` +
-      `<span class="arrow">${dir === "lower" ? "go lower" : "go higher"}</span>`;
+    b.innerHTML = `<span class="dir">${dir === "lower" ? "−" : "+"}</span>${value} kg`;
     b.addEventListener("click", () => {
       els.total.value = value;
       render();
@@ -775,8 +741,8 @@
         </tr>
         <tr>
           <th>Plates per side</th>
-          <td class="val">${load.bare ? "—" : fmt(load.perSide) + "<u>kg</u>"}</td>
-          <td class="note-cell">${perSideRecipe}</td>
+          <td class="val recipe">${perSideRecipe}</td>
+          <td class="note-cell">${load.bare ? "—" : fmt(load.perSide) + " kg / side"}</td>
         </tr>
         <tr>
           <th>Overall total</th>
@@ -815,12 +781,6 @@
       : `<span class="per-side">per side <b>${fmt(load.perSide)} kg</b></span>`;
 
     fig.innerHTML = `<span class="fig-cap">${cap}</span>`;
-    if (count > 1) {
-      const repeat = document.createElement("p");
-      repeat.className = "fig-repeat";
-      repeat.innerHTML = 'Build <b>2 dumbbells</b> the same way.';
-      fig.appendChild(repeat);
-    }
     fig.appendChild(inner);
     const foot = document.createElement("div");
     foot.className = "fig-foot";
