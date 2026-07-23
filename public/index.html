@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
 
 <title>Dumbbell Loader — Plate Calculator for the Eisenlink Adjustable Square Dumbbell</title>
 <meta name="description" content="Free plate-loading calculator for the Eisenlink adjustable square dumbbell (also sold as Zipro): a 4 kg screw-cap handle with 1 kg and 2 kg cast-iron plates, up to 36 kg. Enter a target weight and get the exact, balanced plate stack per dumbbell." />
@@ -185,6 +185,8 @@
     line-height: 1.55;
     -webkit-font-smoothing: antialiased;
     padding: clamp(18px, 4vw, 46px) 18px 90px;
+    touch-action: manipulation; /* no double-tap-to-zoom */
+    -webkit-text-size-adjust: 100%;
   }
 
   .sheet {
