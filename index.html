@@ -370,11 +370,11 @@
   .spec th {
     text-align: left; font-weight: 400;
     font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft);
-    padding: 11px 0; width: 42%;
+    padding: 11px 10px 11px 0; width: 38%;
   }
   .spec td { padding: 11px 0; vertical-align: baseline; }
   .spec td.val { font-family: var(--sans); font-weight: 700; font-size: 19px; white-space: nowrap; }
-  .spec td.val.recipe { font-size: 15px; white-space: normal; line-height: 1.25; }
+  .spec td.val.recipe { font-size: 14px; white-space: nowrap; }
   .spec td.val u { font-family: var(--mono); font-weight: 400; font-size: 12px; color: var(--ink-soft); text-decoration: none; margin-left: 3px; }
   .spec td.note-cell { text-align: right; color: var(--ink-soft); font-size: 12.5px; }
 
@@ -725,7 +725,6 @@
   }
 
   function renderSummary(total, count, perDumbbell, load) {
-    const fixedNote = load.bare ? "bare handle, no screws" : "handle + 2 screws";
     const perSideRecipe = load.bare ? "no plates" : recipeShort(load);
     els.summary.innerHTML = `
       <table class="spec">
@@ -737,12 +736,12 @@
         <tr>
           <th>Fixed weight</th>
           <td class="val">${load.fixed}<u>kg</u></td>
-          <td class="note-cell">${fixedNote}</td>
+          <td class="note-cell"></td>
         </tr>
         <tr>
           <th>Plates per side</th>
           <td class="val recipe">${perSideRecipe}</td>
-          <td class="note-cell">${load.bare ? "—" : fmt(load.perSide) + " kg / side"}</td>
+          <td class="note-cell">${load.bare ? "—" : fmt(load.perSide) + " kg"}</td>
         </tr>
         <tr>
           <th>Overall total</th>
@@ -755,7 +754,7 @@
   function recipeShort(load) {
     const parts = [];
     if (load.twos) parts.push(`${load.twos}× 2 kg`);
-    if (load.ones) parts.push(`${load.ones}× 1 kg`);
+    if (load.ones) parts.push(`1 kg`); // only ever one 1 kg plate per side
     return parts.length ? parts.join(" + ") : "screws only";
   }
 
@@ -874,10 +873,30 @@
 
   render();
 
-  // Progressive web app: register the service worker for offline + install.
+  // Progressive web app: register the service worker and keep it fresh.
+  // iOS resumes the installed app from a snapshot instead of reloading, so we
+  // actively check for a new worker on launch and whenever the app regains
+  // focus, and reload once a new worker takes control.
   if ("serviceWorker" in navigator) {
+    const hadController = !!navigator.serviceWorker.controller;
+    let reloading = false;
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      if (!hadController || reloading) return; // skip the very first install
+      reloading = true;
+      window.location.reload();
+    });
     window.addEventListener("load", () => {
-      navigator.serviceWorker.register("sw.js").catch(() => {});
+      navigator.serviceWorker
+        .register("sw.js")
+        .then((reg) => {
+          const check = () => reg.update().catch(() => {});
+          check();
+          setInterval(check, 60 * 60 * 1000);
+          document.addEventListener("visibilitychange", () => {
+            if (document.visibilityState === "visible") check();
+          });
+        })
+        .catch(() => {});
     });
   }
 </script>

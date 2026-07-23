@@ -1,5 +1,7 @@
 // Dumbbell Loader — service worker (offline shell + installability)
-const CACHE = "dumbbell-loader-v1";
+// __BUILD__ is replaced with the commit SHA at deploy time so every release
+// ships a distinct worker, which is what triggers the update-and-reload flow.
+const CACHE = "dumbbell-loader-__BUILD__";
 const SHELL = [
   "./",
   "./index.html",
