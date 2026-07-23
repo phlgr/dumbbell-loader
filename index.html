@@ -28,6 +28,13 @@
 <!-- Favicon: dumbbell drawn in the sheet's petrol ink on a rounded ink tile -->
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='7'%20fill='%23263640'/%3E%3Cg%20fill='%23e7e3d7'%3E%3Crect%20x='13'%20y='14.5'%20width='6'%20height='3'/%3E%3Crect%20x='9'%20y='10'%20width='3'%20height='12'%20rx='.8'/%3E%3Crect%20x='20'%20y='10'%20width='3'%20height='12'%20rx='.8'/%3E%3Crect%20x='5.5'%20y='12'%20width='2.5'%20height='8'%20rx='.8'/%3E%3Crect%20x='24'%20y='12'%20width='2.5'%20height='8'%20rx='.8'/%3E%3C/g%3E%3C/svg%3E" />
 
+<!-- Progressive web app -->
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="apple-touch-icon" href="icon-192.png" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="Dumbbell" />
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -379,18 +386,24 @@
   .figure {
     border: 1px solid var(--line);
     position: relative;
-    padding: 30px 16px 20px;
+    padding: 16px 16px 20px;
     background: rgba(var(--ink-rgb), 0.025);
   }
   .fig-cap {
-    position: absolute; top: 8px; left: 12px;
+    display: block;
     font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint);
   }
+  .fig-repeat {
+    margin: 10px 0 0; padding-left: 12px;
+    font-size: 12.5px; color: var(--ink-soft);
+    border-left: 2px solid var(--ink-soft);
+  }
+  .fig-repeat b { color: var(--ink); font-weight: 600; }
   .fig-inner {
     position: relative;
     display: flex; align-items: center; justify-content: center;
     min-height: 150px;
-    overflow-x: auto;
+    overflow: hidden;
   }
   /* center axis line */
   .axis {
@@ -405,7 +418,7 @@
     /* dash-dot centerline feel */
   }
 
-  .dumbbell { display: flex; align-items: center; position: relative; z-index: 1; }
+  .dumbbell { display: flex; align-items: center; position: relative; z-index: 1; transform-origin: center center; }
   .side { display: flex; align-items: center; }
   .side.left { flex-direction: row-reverse; }
 
@@ -781,34 +794,56 @@
   }
 
   function renderDumbbells(count, perDumbbell, load) {
-    for (let i = 0; i < count; i++) {
-      const fig = document.createElement("div");
-      fig.className = "figure";
+    // Both dumbbells are identical, so draw one and note the repeat.
+    const fig = document.createElement("div");
+    fig.className = "figure";
 
-      const cap = count > 1 ? `Fig. ${i + 1} — dumbbell ${i + 1} of ${count}` : "Fig. 1 — assembled dumbbell";
+    const cap =
+      count > 1 ? "Fig. 1 — one of two identical dumbbells" : "Fig. 1 — assembled dumbbell";
 
-      const inner = document.createElement("div");
-      inner.className = "fig-inner";
-      inner.innerHTML = '<div class="axis"></div>';
-      inner.appendChild(buildDumbbell(perDumbbell, load));
+    const inner = document.createElement("div");
+    inner.className = "fig-inner";
+    inner.innerHTML = '<div class="axis"></div>';
+    inner.appendChild(buildDumbbell(perDumbbell, load));
 
-      const recipeHtml = load.bare
-        ? '<span class="recipe"><span class="mut">no plates —</span> bare 4 kg handle</span>'
-        : `<span class="recipe">${recipeShort(load).replace(/×/g, '<span class="mut">×</span>')}` +
-          ` <span class="mut">per side</span></span>`;
-      const perSideHtml = load.bare
-        ? ""
-        : `<span class="per-side">per side <b>${fmt(load.perSide)} kg</b></span>`;
+    const recipeHtml = load.bare
+      ? '<span class="recipe"><span class="mut">no plates —</span> bare 4 kg handle</span>'
+      : `<span class="recipe">${recipeShort(load).replace(/×/g, '<span class="mut">×</span>')}` +
+        ` <span class="mut">per side</span></span>`;
+    const perSideHtml = load.bare
+      ? ""
+      : `<span class="per-side">per side <b>${fmt(load.perSide)} kg</b></span>`;
 
-      fig.innerHTML = `<span class="fig-cap">${cap}</span>`;
-      fig.appendChild(inner);
-      const foot = document.createElement("div");
-      foot.className = "fig-foot";
-      foot.innerHTML = recipeHtml + perSideHtml;
-      fig.appendChild(foot);
-
-      els.stage.appendChild(fig);
+    fig.innerHTML = `<span class="fig-cap">${cap}</span>`;
+    if (count > 1) {
+      const repeat = document.createElement("p");
+      repeat.className = "fig-repeat";
+      repeat.innerHTML = 'Build <b>2 dumbbells</b> the same way.';
+      fig.appendChild(repeat);
     }
+    fig.appendChild(inner);
+    const foot = document.createElement("div");
+    foot.className = "fig-foot";
+    foot.innerHTML = recipeHtml + perSideHtml;
+    fig.appendChild(foot);
+
+    els.stage.appendChild(fig);
+    fitDumbbell(inner);
+  }
+
+  // Shrink the drawing to fit its box so it never scrolls sideways (mobile).
+  function fitDumbbell(inner) {
+    const db = inner.querySelector(".dumbbell");
+    if (!db) return;
+    db.style.transform = "";
+    const avail = inner.clientWidth;
+    const natural = db.offsetWidth;
+    if (natural > avail && natural > 0) {
+      db.style.transform = `scale(${avail / natural})`;
+    }
+  }
+  function fitAllDumbbells() {
+    document.querySelectorAll(".fig-inner").forEach(fitDumbbell);
   }
 
   // One side, ordered from the grip outward: 2kg plates, then 1kg, then screw.
@@ -842,6 +877,7 @@
   els.total.addEventListener("input", render);
   els.minus.addEventListener("click", () => step(-1));
   els.plus.addEventListener("click", () => step(1));
+  window.addEventListener("resize", fitAllDumbbells);
 
   // Theme: follow the system by default, let the toggle force light/dark.
   const root = document.documentElement;
@@ -877,6 +913,13 @@
   });
 
   render();
+
+  // Progressive web app: register the service worker for offline + install.
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("sw.js").catch(() => {});
+    });
+  }
 </script>
 </body>
 </html>

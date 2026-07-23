@@ -1,0 +1,17 @@
+{
+  "name": "Dumbbell Loader",
+  "short_name": "Dumbbell",
+  "description": "Plate-loading calculator for the Eisenlink adjustable square dumbbell (also sold as Zipro).",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#e7e3d7",
+  "theme_color": "#263640",
+  "categories": ["health", "fitness", "utilities"],
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
