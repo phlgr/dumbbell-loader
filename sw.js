@@ -9,6 +9,12 @@ const SHELL = [
   "./icon-192.png",
   "./icon-512.png",
   "./icon-512-maskable.png",
+  "./fonts/plex-mono-400.woff2",
+  "./fonts/plex-mono-500.woff2",
+  "./fonts/plex-mono-600.woff2",
+  "./fonts/plex-sans-500.woff2",
+  "./fonts/plex-sans-600.woff2",
+  "./fonts/plex-sans-700.woff2",
 ];
 
 self.addEventListener("install", (e) => {

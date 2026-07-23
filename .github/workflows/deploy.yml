@@ -25,9 +25,10 @@ jobs:
 
       - name: Assemble site and stamp service-worker version
         run: |
-          mkdir _site
-          cp index.html sw.js manifest.webmanifest llms.txt CNAME \
+          mkdir -p _site/fonts
+          cp index.html sw.js manifest.webmanifest llms.txt \
              icon-192.png icon-512.png icon-512-maskable.png _site/
+          cp fonts/*.woff2 _site/fonts/
           sed -i "s/__BUILD__/${GITHUB_SHA}/g" _site/sw.js
 
       - uses: actions/configure-pages@v5
