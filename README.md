@@ -4,7 +4,7 @@ Plate-loading calculator for the **Eisenlink adjustable square dumbbell** (the A
 
 Enter the total weight you want to lift and pick one or two dumbbells; it works out the exact, balanced plate stack for each and draws it.
 
-**Live:** https://phlgr.github.io/dumbbell-loader/
+**Live:** https://dumbbell.gartz.dev/
 
 ## Loading rules
 
